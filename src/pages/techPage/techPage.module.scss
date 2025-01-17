@@ -1,0 +1,68 @@
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+.headBoxContainer{
+  width: 70px;
+  height: 70px;
+}
+  .headerCon{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    //border: 1px solid #13BD7E;
+    min-margin: 0;
+    gap: 10px;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+.contents{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  gap: 10px;
+}
+.languageBox {
+  display: flex;
+  img {
+    height: 50px;
+    transition: transform 0.3s ease;  /* Add transition for smooth scaling */
+    :hover {
+      transform: scale(1.5);  /* Use transform instead of scale */
+    }
+  }
+  align-items: center;
+  gap: 15px;
+}
+
+.imageDiv{
+  transition: transform 0.3s ease;  /* Add transition for smooth scaling */
+  :hover {
+    transform: scale(1.2);  /* Use transform instead of scale */
+  }
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.explanationBox {
+  pointer-events: none;  /* Disable interaction */
+  height: 50px;
+  padding: 5px;
+  color: black;
+}
+.line{
+  width: 95%;
+  height: 1px;
+  background-color: white;
+}

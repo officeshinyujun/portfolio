@@ -1,0 +1,41 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+}
+.headText{
+  color: white;
+  font-family: SUITE-Regular, sans-serif;
+  font-weight: lighter;
+  font-size: 40px;
+  position: absolute;
+  font-weight: 100;
+  left: 80px;
+  top: 80px;
+}
+.startContainer{
+  width: 100vw;
+  height: 100vh;
+}
+.container {
+  width: 100vw;
+  background: black;
+}
+.focusText{
+  background-color: white;
+  color: #4d3225;
+}
+.techContainer{
+  width: 100vw;
+  height: 100vh;
+}
+.loadingCon{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}

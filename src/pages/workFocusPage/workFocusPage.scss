@@ -1,0 +1,43 @@
+.workFocusCon {
+    max-width: 95%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    overflow-x: hidden; /* 가로 스크롤 활성화 */
+    overflow-y: hidden; /* 필요하지 않으면 세로 스크롤 숨김 */
+  }
+
+  .workFocusPan{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .buttonCon{
+    width: 95%;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button{
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+    padding: 40px;
+  }
+  .buttonCircle{
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    :hover{
+      cursor: pointer;
+    }
+  }
