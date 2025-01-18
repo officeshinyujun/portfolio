@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { ShaderMaterial } from 'three';
 import styles from "./mainPage.module.scss";
 import Loader from "./3dLoaders/3dLoader.tsx";
 import { useGLTF, useProgress } from "@react-three/drei";
+
+
 
 export default function MainPage() {
     const headTextRef = useRef<HTMLDivElement>(null);
@@ -70,7 +73,7 @@ export default function MainPage() {
                     신유준
                 </span>
                 <span> 입니다.</span>
-                <p style={{fontSize:20, color:'#6a6a6a'}}>
+                <p style={{fontSize:20, color:'#a8a8a8', marginTop:"10px"}}>
                     선린인터넷고등학교에서 프론트엔드를 배우고 있고,<br/>
                     개발에 열정있게 임하고 있습니다.
                 </p>

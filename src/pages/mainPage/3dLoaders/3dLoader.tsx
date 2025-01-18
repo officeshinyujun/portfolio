@@ -2,6 +2,13 @@ import {Canvas, useFrame, useThree} from '@react-three/fiber';
 import styles from "./threeLodaer.module.scss";
 import {useEffect, useRef, useState} from "react";
 import * as THREE from "three";
+import {
+    EffectComposer,
+    Bloom,
+    BrightnessContrast,
+    ChromaticAberration,
+    DepthOfField, Pixelation, Glitch, HueSaturation
+} from '@react-three/postprocessing';
 import {OrbitControls, useGLTF, useProgress} from "@react-three/drei";
 import {Suspense} from "react";
 import ThreeGrid from "../../../components/threeGrid.tsx";
@@ -82,12 +89,13 @@ function BlackHole({ model }: { model: THREE.Group }) {
 
     return (
         <primitive
-            rotation = {[0 , 0,10*Math.PI/180]}
-            object={model.scene} // model.scene으로 수정
+            rotation = {[0 ,0,5*Math.PI/180]}
+            object={model.scene}
             scale={6}
             position={[0, 3, 0]}
             ref={blackHoleRef}
         />
+
     );
 }
 
@@ -109,11 +117,23 @@ export default function Loader({model} : props) {
                 }}
             >
                     <BlackHole model={model}/>
+                <pointLight position={[0, 3, 0]} distance={100} intensity={20}></pointLight>
                     <CameraController/>
                     {/*<CameraSetup/>*/}
                 {/*<OrbitControls/>*/}
                 {/*<ThreeGrid/>*/}
+                    <EffectComposer>
+                        <Bloom intensity={3} blurPass={undefined} luminanceThreshold={0.2} luminanceSmoothing={0.9} />
+                        {/*<Glitch delay={[3, 5]} />*/}
+                        <HueSaturation ></HueSaturation>
+                        <DepthOfField
+                            focusDistance={0} // where to focus
+                            focalLength={0.07} // focal length
+                            bokehScale={1.4} // bokeh size
+                        />
+                    </EffectComposer>
             </Canvas>
+
         </div>
     );
 }
