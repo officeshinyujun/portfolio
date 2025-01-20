@@ -105,15 +105,18 @@ export default function Loader({model} : props) {
     return (
         <div className={styles.container}>
             <Canvas
-                gl={{alpha: true}}
-                onCreated={({gl}) => {
-                    gl.setClearColor(0x000000, 0)
-                }}
+                gl={{ alpha: true }}
+                onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
                 camera={{
                     fov: 75,
                     near: 1,
                     far: 1000,
                     position: [0, 3, 7.5],
+                }}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'block', // block 요소로 설정
                 }}
             >
                     <BlackHole model={model}/>
