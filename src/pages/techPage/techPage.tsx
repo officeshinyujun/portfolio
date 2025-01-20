@@ -12,7 +12,7 @@ import reactLogo from "../../assets/image/react-2.svg";
 import rnLogo from "../../assets/image/react-native-1.svg"
 import electronLogo from "../../assets/electron-svgrepo-com(1).svg"
 import {pagesProps} from "../../feature/pagesProps.tsx";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Header from "../../components/header/header.tsx";
 
 export default function TechPage() {
@@ -41,17 +41,17 @@ export default function TechPage() {
                         onMouseLeave={handleMouseLeave}
                     >
                         <img src={jsLogo} alt="jsLogo"/>
-                        {/*{hoveredIndex === 0 && (*/}
-                        {/*    <motion.div*/}
-                        {/*        className={styles.explanationBox}*/}
-                        {/*        style={{background: "#f0db4f"}}*/}
-                        {/*        initial={{opacity: 0}}*/}
-                        {/*        animate={{opacity: 1}}*/}
-                        {/*        transition={{duration: 0.3}}*/}
-                        {/*    >*/}
-                        {/*        리액트와 기초적인 문법등을 구사할 수 있습니다.*/}
-                        {/*    </motion.div>*/}
-                        {/*)}*/}
+                        {hoveredIndex === 0 && (
+                            <motion.div
+                                className={styles.explanationBox}
+                                style={{background: "#f0db4f"}}
+                                initial={{opacity: 0}}
+                                animate={{opacity: 1}}
+                                transition={{duration: 0.3}}
+                            >
+                                리액트와 기초적인 문법등을 구사할 수 있습니다.
+                            </motion.div>
+                        )}
                     </div>
                     <div
                         className={styles.imageDiv}
