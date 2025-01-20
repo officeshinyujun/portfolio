@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ShaderMaterial } from 'three';
+import {pagesProps} from "../../feature/pagesProps.tsx";
 import styles from "./mainPage.module.scss";
 import Loader from "./3dLoaders/3dLoader.tsx";
 import { useGLTF, useProgress } from "@react-three/drei";
-
-
 
 export default function MainPage() {
     const headTextRef = useRef<HTMLDivElement>(null);
@@ -53,17 +52,6 @@ export default function MainPage() {
 
         requestAnimationFrame(fadeInAndMove); // 애니메이션 시작
     }, [progress, blackHole.scene]); // 로드 상태와 blackHole의 변경 감지
-
-    window.addEventListener("scroll", function () {
-        const scrollY = window.scrollY;
-
-        if (headTextRef.current && threeContainerRef.current) {
-            const newY = 60 - scrollY / 3;
-            const newOp = Math.max(0, Math.min(1, 1 - scrollY / 700)); // Adjusted opacity calculation
-            headTextRef.current.style.top = `${newY}px`;
-            threeContainerRef.current.style.opacity = `${newOp}`;
-        }
-    });
 
     return (
         <div className={styles.container}>

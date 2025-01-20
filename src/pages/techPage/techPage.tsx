@@ -11,13 +11,13 @@ import nestLogo from "../../assets/image/nestjs.svg"
 import reactLogo from "../../assets/image/react-2.svg";
 import rnLogo from "../../assets/image/react-native-1.svg"
 import electronLogo from "../../assets/electron-svgrepo-com(1).svg"
+import {pagesProps} from "../../feature/pagesProps.tsx";
 // import { motion } from "framer-motion";
 import Header from "../../components/header/header.tsx";
 
 export default function TechPage() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
-    const [opacity, setOpacity] = useState(0);
-    const containerRef = useRef(null);
+    const [opacity, setOpacity] = useState(0.8);
 
     const handleMouseEnter = (index : any) => {
         setHoveredIndex(index);
@@ -27,37 +27,10 @@ export default function TechPage() {
         setHoveredIndex(null);
     };
 
-    useEffect(() => {
-        const handleOpacity = () => {
-            const scrollPosition = window.scrollY;
-            const windowHeight = window.innerHeight;
-
-            let newOpacity = Math.min(scrollPosition / 1000, 1);
-
-            if (scrollPosition > windowHeight) {
-                newOpacity = Math.max(1 - (scrollPosition - windowHeight) / 500, 0);
-                console.log(`newOpacity: ${newOpacity}`);
-            }
-
-            setOpacity(newOpacity);
-        };
-
-        handleOpacity();
-
-        window.addEventListener("scroll", handleOpacity);
-        return () => {
-            window.removeEventListener("scroll", handleOpacity);
-        };
-    }, []);
 
     return (
         <div
             className={styles.container}
-            ref={containerRef}
-            style={{
-                opacity: opacity,
-                transition: 'opacity 0.3s ease'
-            }}
         >
             <Header contextLink={"/sixBox_.glb"} title="stack"/>
             <div className={styles.contents}>
