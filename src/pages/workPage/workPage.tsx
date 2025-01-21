@@ -65,9 +65,9 @@ export default function WorkPage() {
             className={styles.container}
         >
             <Header contextLink={"/triBox_.glb"} title="work" />
-            <div className={styles.contents}>
+            {/*<div className={styles.contents}>*/}
 
-            </div>
+            {/*</div>*/}
         </div>
     );
 }

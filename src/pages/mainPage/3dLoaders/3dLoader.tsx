@@ -72,11 +72,6 @@ function CameraController() {
         return null;
     }
 
-window.addEventListener('scroll', function() {
-    const scrollY = window.scrollY;
-    console.log(scrollY);
-
-});
 
 
 function BlackHole({ model }: { model: THREE.Group }) {

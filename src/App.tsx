@@ -1,10 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import styles from "./app.module.scss";
+import headerStyles from "./components/header/header.module.scss"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import WorkPage from "./pages/workPage/workPage.tsx";
-import MainPage from "./pages/mainPage/mainPage.tsx";
-import TechPage from "./pages/techPage/techPage.tsx";
+import WorkPage from "./pages/workPage/workPage";
+import MainPage from "./pages/mainPage/mainPage";
+import TechPage from "./pages/techPage/techPage";
 
 function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -23,8 +24,20 @@ function App() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
         const pages = gsap.utils.toArray<HTMLElement>(`.${styles.page}`);
-        const mainPage = gsap.utils.toArray<HTMLElement>(`.${styles.mainPage}`);
-        const techPage = gsap.utils.toArray<HTMLElement>(`.${styles.techPage}`);
+
+        const pageHeaderIn = (header: HTMLElement) => {
+            gsap.to(header, {
+                height: "50px",
+                fontSize: "30px",
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: header,
+                    start: "top top", // 헤더가 화면 하단에 도달하면 시작
+                    end: "top bottom", // 헤더가 화면 상단에 도달하고 조금 더 스크롤될 때까지
+                    scrub: true,
+                }
+            });
+        }
 
         const fadeOut = (page: HTMLElement) => {
             gsap.to(page, {
@@ -44,7 +57,6 @@ function App() {
         }
 
         const fadeIn = (pages: HTMLElement[], index: number) => {
-            // 스케일 애니메이션
             gsap.from(pages[index + 1], {
                 scale: 1,
                 ease: "none",
@@ -56,26 +68,33 @@ function App() {
                 }
             });
 
-            // 배경색만 따로 애니메이션
-            gsap.to(pages[index + 1],
-                {
-                    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                    scrollTrigger: {
-                        trigger: pages[index + 1],
-                        start: "top bottom",
-                        end:"top top",
-                        scrub: true,
+            gsap.to(pages[index + 1], {
+                backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                scrollTrigger: {
+                    trigger: pages[index + 1],
+                    start: "top bottom",
+                    end: "top top",
+                    scrub: true,
+                }
+            });
+
+            // 헤더 애니메이션 트리거
+            ScrollTrigger.create({
+                trigger: pages[index + 1],
+                start: "top bottom", // 페이지가 화면 하단에 보이기 시작할 때
+                onEnter: () => {
+                    const header = pages[index + 1].querySelector(`.${headerStyles.headerCon}`);
+                    if (header) {
+                        pageHeaderIn(header as HTMLElement);
                     }
                 }
-            );
+            });
         }
 
         if (pages.length > 0) {
             pages.forEach((page, index) => {
                 if (index < pages.length - 1) {
-                    // 현재 페이지 fadeOut 애니메이션
                     fadeOut(page);
-                    // 다음 페이지 fadeIn 애니메이션
                     fadeIn(pages, index);
                 }
             });

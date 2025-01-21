@@ -1,24 +1,18 @@
-import styles from "../../pages/techPage/techPage.module.scss";
+import styles from "./header.module.scss";
 import {Canvas} from "@react-three/fiber";
 import Head3dBox from "../head3dBox/head3dBox.tsx";
+import { forwardRef } from 'react';
 
 type props = {
-    contextLink : string,
-    title : string,
+    title: string
 }
 
-export default function Header({contextLink, title}: props) {
+const Header = forwardRef<HTMLDivElement, props>(({ title }, ref) => {
     return (
-        <div className={styles.headerCon}>
-            <div style={{display: "flex", alignItems: "center", gap: 12, width: "100%"}}>
-                <div className={styles.headBoxContainer}>
-                    <Canvas>
-                        <Head3dBox context={contextLink}/>
-                    </Canvas>
-                </div>
-                <p>{title}</p>
-            </div>
-            <div className={styles.line}></div>
+        <div className={styles.headerCon} ref={ref}>
+            <p>{title}</p>
         </div>
     )
-}
+});
+
+export default Header;
