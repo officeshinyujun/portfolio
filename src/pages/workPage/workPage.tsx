@@ -2,6 +2,7 @@ import styles from "./workPage.module.scss";
 import React, { useEffect, useState, useRef } from "react";
 import Header from "../../components/header/header.tsx";
 import { OrbitControls, useGLTF } from "@react-three/drei";
+import PageLine from "../../components/pageLine/pageLine.tsx";
 
 
 export default function WorkPage() {
@@ -64,7 +65,8 @@ export default function WorkPage() {
         <div
             className={styles.container}
         >
-            <Header contextLink={"/triBox_.glb"} title="work" />
+            <Header title="work" />
+            <PageLine/>
             {/*<div className={styles.contents}>*/}
 
             {/*</div>*/}

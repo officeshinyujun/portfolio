@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import styles from "./app.module.scss";
 import headerStyles from "./components/header/header.module.scss"
+import pageLineStyles from "./components/pageLine/pagesLine.module.scss"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WorkPage from "./pages/workPage/workPage";
 import MainPage from "./pages/mainPage/mainPage";
@@ -25,15 +26,39 @@ function App() {
         gsap.registerPlugin(ScrollTrigger);
         const pages = gsap.utils.toArray<HTMLElement>(`.${styles.page}`);
 
-        const pageHeaderIn = (header: HTMLElement) => {
+        const pageHeaderIn = (header: HTMLElement, page: HTMLElement, pageLine: HTMLElement) => {
             gsap.to(header, {
                 height: "50px",
                 fontSize: "30px",
                 ease: "power2.out",
                 scrollTrigger: {
-                    trigger: header,
-                    start: "top top", // 헤더가 화면 하단에 도달하면 시작
-                    end: "top bottom", // 헤더가 화면 상단에 도달하고 조금 더 스크롤될 때까지
+                    trigger: page,
+                    start: "top center-=200", // 헤더가 화면 하단에 도달하면 시작
+                    end: "top top",
+                    scrub: true,
+                }
+            });
+            gsap.to(pageLine,{
+                left:"50px",
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: page,
+                    start: "top center-=200", // 헤더가 화면 하단에 도달하면 시작
+                    end: "top top",
+                    scrub: true,
+                }
+            })
+        }
+
+        const pageHeaderOut = (header : HTMLElement, page: HTMLElement) => {
+            gsap.to(header, {
+                height: "50px",
+                fontSize: "30px",
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: page,
+                    start: "top center-=200", // 헤더가 화면 하단에 도달하면 시작
+                    end: "top top",
                     scrub: true,
                 }
             });
@@ -84,8 +109,9 @@ function App() {
                 start: "top bottom", // 페이지가 화면 하단에 보이기 시작할 때
                 onEnter: () => {
                     const header = pages[index + 1].querySelector(`.${headerStyles.headerCon}`);
-                    if (header) {
-                        pageHeaderIn(header as HTMLElement);
+                    const pageLine = pages[index+1].querySelector(`.${pageLineStyles.line}`)
+                    if (header && pageLine) {
+                        pageHeaderIn(header as HTMLElement, pages[index+1], pageLine);
                     }
                 }
             });
