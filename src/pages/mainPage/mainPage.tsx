@@ -11,7 +11,7 @@ export default function MainPage() {
     const focusTextRef = useRef<HTMLElement>(null);
     const threeContainerRef = useRef<HTMLDivElement>(null);
 
-    const { loaded, total, progress } = useProgress(); // 로딩 상태 확인
+    const { progress } = useProgress(); // 로딩 상태 확인
         const blackHole = useGLTF("/blackhole(1).glb"); // GLTF 로드
 
     useEffect(() => {
@@ -56,15 +56,7 @@ export default function MainPage() {
     return (
         <div className={styles.container}>
             <div className={styles.headText} ref={headTextRef}>
-                <p>안녕하세요, 기록하는 개발자</p>
-                <span className={styles.focusText} ref={focusTextRef}>
-                    신유준
-                </span>
-                <span> 입니다.</span>
-                <p style={{fontSize:20, color:'#a8a8a8', marginTop:"10px"}}>
-                    선린인터넷고등학교에서 프론트엔드를 배우고 있고,<br/>
-                    개발에 열정있게 임하고 있습니다.
-                </p>
+                신유준의 포트폴리오에 오신걸 환영합니다.
             </div>
             <div className={styles.threeContainer} ref={threeContainerRef}>
                 <Loader model={blackHole}/>
