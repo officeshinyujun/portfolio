@@ -1,10 +1,6 @@
+@import "../pages" ;
+@import "../../components/color" ;
 .container{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: end;
   z-index: 3;
   background: transparent;
 }
@@ -75,7 +71,7 @@
   gap: 10px;
   font-size: 30px;
   span{
-    color: #909090;
+    color: $text-second;
     font-size: 20px;
   }
 }

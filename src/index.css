@@ -13,5 +13,6 @@
   margin: 0;
   box-sizing: border-box;
   font-family: SUITE-Regular, sans-serif;
-
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none;
 }

@@ -1,0 +1,15 @@
+.contents{
+  width: calc(100% - 50px);
+  height: calc(100% - 50px);
+  //border: 1px solid red;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: end;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+}
+

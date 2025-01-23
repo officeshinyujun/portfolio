@@ -1,3 +1,5 @@
+@import "../../../../components/color" ;
+
 .container{
   width: calc(100%/3);
   color: white;
@@ -8,7 +10,7 @@
   padding: 20px;
   gap: 20px;
   background: transparent;
-  border-left:1px solid #474747
+  border-left:1px solid $border-second;
 }
 .header{
   display: flex;

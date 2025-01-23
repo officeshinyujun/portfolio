@@ -1,8 +1,10 @@
+@import "../color";
+
 .line{
   height: 100%;
   top: 0;
   width: 1px;
-  background-color: #474747;
+  background-color: $border-second;
   position: absolute;
   left: 0;
 }

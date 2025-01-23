@@ -1,3 +1,5 @@
+@import "../color" ;
+
 .headerCon{
   width: 100vw;
   display: flex;
@@ -5,7 +7,7 @@
   justify-content: start;
   color: white;
   height: 100vh;
-  border-bottom: 1px solid #474747;
+  border-bottom: 1px solid $border-second;
   gap: 10px;
   padding: 0 70px;
   font-size: 200px;

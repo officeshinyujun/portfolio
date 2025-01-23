@@ -1,71 +1,77 @@
+@import "../../components/color" ;
+@import "../pages" ;
+
 .container{
-  width: 100vw;
-  height: 100vh;
-  background: transparent;
-  color: #fff;
+  color: $text-first;
 }
-.workList{
-  display: flex;
-  gap: 20px;
-}
-.workActiveCircle{
-  scale: 1.3;
-  transition: scale 0.7s;
-}
+//.workList{
+//  display: flex;
+//  gap: 20px;
+//}
+//.workActiveCircle{
+//  scale: 1.3;
+//  transition: scale 0.7s;
+//}
 .contents {
-  width: 100vw;
-  height: calc(100vh - 160px);
-  color: #fff;
+  color: $text-first;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: start;
-  margin-top: 10px;
   gap: 25px;
   overflow: visible;
   background: transparent;
 }
 
-.workBoxCon {
-  max-width: 95%;
-  height: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  overflow-x: hidden; /* 가로 스크롤 활성화 */
-  overflow-y: hidden; /* 필요하지 않으면 세로 스크롤 숨김 */
-}
-
-.workBoxPan{
-  width: 100%;
+.workList{
   height: 100%;
+  overflow-y: auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
+  padding: 30px;
+  gap: 20px;
 }
-
-.buttonCon{
-  width: 95%;
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  button{
-    background: transparent;
-    border: none;
-    outline: none;
-  }
-  padding: 40px;
-}
-.buttonCircle{
-  width: 40px;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  :hover{
-    cursor: pointer;
-  }
-}
+//.workBoxCon {
+//  max-width: 95%;
+//  height: 90%;
+//  display: flex;
+//  align-items: center;
+//  justify-content: start;
+//  overflow-x: hidden; /* 가로 스크롤 활성화 */
+//  overflow-y: hidden; /* 필요하지 않으면 세로 스크롤 숨김 */
+//}
+//
+//.workBoxPan{
+//  width: 100%;
+//  height: 100%;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//}
+//
+//.buttonCon{
+//  width: 95%;
+//  position: absolute;
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  button{
+//    background: transparent;
+//    border: none;
+//    outline: none;
+//  }
+//  padding: 40px;
+//}
+//.buttonCircle{
+//  width: 40px;
+//  height: 40px;
+//  background: rgba(0, 0, 0, 0.7);
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  border-radius: 50%;
+//  :hover{
+//    cursor: pointer;
+//  }
+//}

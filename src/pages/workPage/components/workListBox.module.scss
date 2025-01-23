@@ -1,0 +1,21 @@
+@import "../../../components/color" ;
+
+.container{
+  width: 700px;
+  min-height: 250px;
+  border: 1px solid $border-second;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+  p:first-child{
+    font-size: 30px;
+  }
+  p:last-child{
+    font-size: 15px;
+    color: $text-second;
+  }
+  :hover{
+    cursor: pointer;
+  }
+}
