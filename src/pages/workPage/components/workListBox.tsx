@@ -1,5 +1,5 @@
 import styles from "./workListBox.module.scss";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 
 type Project = {
@@ -12,9 +12,10 @@ type Project = {
 
 type Props = {
     project: Project;
+    selectedFunction: (project: Project) => void; // 함수 타입 지정
 };
 
-export default function WorkListBox({ project }: Props) {
+export default function WorkListBox({ project, selectedFunction }: Props) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const handleHoverContainer = () => {
@@ -30,7 +31,7 @@ export default function WorkListBox({ project }: Props) {
     const handleHoverOutContainer = () => {
         gsap.to(containerRef.current, {
             scale: 1,
-            border: "1px solid #474747",
+            border: "1px solid #1f1f1f",
             duration: 0.7,
         });
     };
@@ -41,6 +42,7 @@ export default function WorkListBox({ project }: Props) {
             className={styles.container}
             onMouseEnter={handleHoverContainer}
             onMouseLeave={handleHoverOutContainer}
+            onClick={() => selectedFunction(project)} // 수정
         >
             <div>
                 <p>{project.title}</p>

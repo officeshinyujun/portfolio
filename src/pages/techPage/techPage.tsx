@@ -37,8 +37,8 @@ export default function TechPage() {
         {
             category: "etc",
             technologies: {
-                ts: { name: "Union type, Generics type 등을 알고 이를 사용할줄 압니다.", logo: tsLogo },
-                python: { name: "Python과 pip를 사용하여 ai 모델을 사용해본 경험이 있습니다.", logo: pythonLogo },
+                TypeScript: {   name: "Union type, Generic type 등을 알고 이를 사용할줄 압니다.", logo: tsLogo },
+                Python: { name: "Python과 pip를 사용하여 ai 모델을 사용해본 경험이 있습니다.", logo: pythonLogo },
             },
         },
     ];

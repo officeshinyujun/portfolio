@@ -1,9 +1,9 @@
 import styles from "./workPage.module.scss";
-import React, { useEffect, useState, useRef } from "react";
+import {useState } from "react";
 import Header from "../../components/header/header.tsx";
-import { OrbitControls, useGLTF } from "@react-three/drei";
 import PageLine from "../../components/pageLine/pageLine.tsx";
 import WorkListBox from "./components/workListBox.tsx";
+import WorkFocusBox from "./components/workFocusBox.tsx";
 
 
 export default function WorkPage() {
@@ -22,7 +22,7 @@ export default function WorkPage() {
             title: "DAT",
             text: "do all tetris",
             styles : {
-                background : "linear-gradient(180deg, #664CCC, #8978CC);",
+                background : "linear-gradient(180deg, #664CCC, #8978CC)",
                 boxShadow : "#664CCC"
             }
         },
@@ -57,22 +57,31 @@ export default function WorkPage() {
         },
     ]);
 
-    return (
-        <div
-            className={styles.container}
-        >
-            <Header title="work" />
-            <PageLine/>
-                <div className={styles.contents}>
-                    <div className={styles.workList}>
-                        {workList.map((item, index) => (
-                            <WorkListBox project={item}/>
-                        ))}
-                    </div>
-                    <div className={styles.workFocusBox}>
+    const [selectedWork, setSelectedWork] = useState(null);
 
-                    </div>
+    const handleSelectedWork = (item: any) => {
+        setSelectedWork(item);
+        console.log(item);
+    };
+
+    return (
+        <div className={styles.container}>
+            <Header title="work" />
+            <PageLine />
+            <div className={styles.contents}>
+                <div className={styles.workList}>
+                    {workList.map((item) => (
+                        <WorkListBox
+                            key={item.index}
+                            project={item}
+                            selectedFunction={handleSelectedWork}
+                        />
+                    ))}
                 </div>
+                <div className={styles.workFocusBox}>
+                    <WorkFocusBox selectedProject={selectedWork}/>
+                </div>
+            </div>
         </div>
     );
 }

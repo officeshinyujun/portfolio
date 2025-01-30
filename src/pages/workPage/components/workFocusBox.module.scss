@@ -1,0 +1,30 @@
+@import "../../../components/color" ;
+
+.container{
+  height: calc(100%);
+  width: 100%;
+  border : 1px solid $border-second;
+  border-radius: $border-second-radius;
+  color: $text-first;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span{
+    color: $text-second;
+  }
+}
+
+.contents{
+  width: 100%;
+  height: 100%;
+  border-radius: $border-second-radius;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  p:first-child{
+    font-size: 30px;
+  }
+  p:last-child{
+    font-size: 15px;
+  }
+}
