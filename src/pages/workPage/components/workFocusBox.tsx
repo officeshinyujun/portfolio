@@ -1,4 +1,11 @@
 import styles from "./workFocusBox.module.scss"
+import {Canvas, useLoader} from "@react-three/fiber";
+import {TextureLoader} from "three";
+import testImage from "../../../assets/image/dat-profile.jpg"
+import {OrbitControls} from "@react-three/drei";
+import ThreeGrid from "../../../components/threeGrid.tsx";
+import { NearestFilter, LinearMipMapLinearFilter } from "three";
+
 
 type Project = {
     title: string,
@@ -14,6 +21,10 @@ type Props = {
 }
 
 export default function WorkFocusBox({selectedProject}: Props) {
+    const testMap = useLoader(TextureLoader, testImage);
+    testMap.magFilter = NearestFilter; // 확대 시 선명하게
+    testMap.minFilter = LinearMipMapLinearFilter; // 축소 시 품질 유지
+
     return (
         <div className={styles.container}>
             {!selectedProject ? (
@@ -22,8 +33,21 @@ export default function WorkFocusBox({selectedProject}: Props) {
                 </span>
             ) : (
                 <div className={styles.contents} style={{background:selectedProject.styles.background}}>
-                    <p>{selectedProject.title}</p>
-                    <p>{selectedProject.text}</p>
+                    <div>
+                        <p>{selectedProject.title}</p>
+                        <p>{selectedProject.text}</p>
+                    </div>
+                    <div className={styles.threeContainer}>
+                        <Canvas>
+                            <ambientLight intensity={3}/>
+                            <mesh>
+                                <planeGeometry args={[960, 540]}/>
+                                <meshStandardMaterial map={testMap}/>
+                            </mesh>
+                            <OrbitControls />
+                            {/*<ThreeGrid/>*/}
+                        </Canvas>
+                    </div>
                 </div>
             )}
 
