@@ -9,10 +9,7 @@
   font-weight: 100;
   left: 80px;
   top: 80px;
-}
-.startContainer{
-  width: 100vw;
-  height: 100vh;
+  opacity: 0;
 }
 .threeContainer{
   width: 100%;
@@ -21,21 +18,15 @@
   align-items: center;
 justify-content: center;
 }
-.focusText{
-  background-color: white;
-  color: black;
-}
-.techContainer{
-  width: 100vw;
-  height: 100vh;
-}
-.loadingCon{
-  width: 100vw;
-  height: 100vh;
+.guideContainer{
   position: absolute;
-  background: black;
+  bottom: 0;
+  width: 100%;
+  opacity: 0;
+  font-size: 20px;
+  padding: 20px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  color: white;
+  align-items: center;
 }

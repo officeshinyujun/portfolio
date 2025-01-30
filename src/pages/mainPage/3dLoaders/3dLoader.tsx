@@ -1,76 +1,58 @@
 import {Canvas, useFrame, useThree} from '@react-three/fiber';
 import styles from "./threeLodaer.module.scss";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
+import { useSpring } from "@react-spring/three";
 import * as THREE from "three";
 import {
     EffectComposer,
     Bloom,
-    BrightnessContrast,
-    ChromaticAberration,
-    DepthOfField, Pixelation, Glitch, HueSaturation
+    DepthOfField, HueSaturation
 } from '@react-three/postprocessing';
-import {OrbitControls, useGLTF, useProgress} from "@react-three/drei";
-import {Suspense} from "react";
-import ThreeGrid from "../../../components/threeGrid.tsx";
 
 type props = {
     model : THREE.Group;
+    onAnimateEnd: () => void;
 }
 
-function CameraController() {
+
+function CameraController({ onAnimateEnd }: { onAnimateEnd: () => void }) {
     const { camera } = useThree();
+    const [t, setT] = useState(0);
+    const targetLookAt = new THREE.Vector3(0, 3, 0);
+    const [hasEnded, setHasEnded] = useState(false);
 
     const quadratic = (x: number): number => {
         return -0.001 * Math.pow(x, 2) + 0.155 * x + 1.964;
     };
 
-    const [t, setT] = useState(0);
-    const targetLookAt = new THREE.Vector3(0, 3, 0);
+    useFrame(() => {
+        if (hasEnded) return; // 애니메이션이 끝나면 실행 중지
 
-    // console.log(t);
-
-        useEffect(() => {
-            const a = 0.2;
+        setT(prevT => {
+            const newT = prevT + 0.05;
             const startZ = 7;
-            const startY = 3;
             const targetZ = 23;
-            const targetY = 5;
+            const a = 0.2;
 
-            // 초기 lookAt 설정
+            const newZ = Math.min(startZ + a * newT * newT, targetZ);
+            const newY = quadratic(newZ);
+
+            camera.position.set(0, newY, newZ);
             camera.lookAt(targetLookAt);
 
-            const interval = setInterval(() => {
-                setT(prev => {
-                    const newT = prev + 0.05;
+            if (newZ >= targetZ) {
+                onAnimateEnd();
+                setHasEnded(true); // 애니메이션 종료 상태 설정
+            }
 
-                    // 각 축의 현재 위치 계산
-                    const newZ = Math.min(startZ + a * newT * newT, targetZ);
-                    const newY = quadratic(newZ);
+            return newT;
+        });
+    });
 
-                    // 카메라 위치 업데이트
-                    camera.position.z = newZ;
-                    camera.position.y = newY;
+    return null;
+}
 
-                    // lookAt 다시 적용
-                    camera.lookAt(targetLookAt);
 
-                    const isAtTarget = newZ >= targetZ;
-                    if (isAtTarget) {
-                        clearInterval(interval);
-                        camera.position.set(0, targetY, targetZ);
-                        camera.lookAt(targetLookAt);
-                        return 0;  // t를 리셋
-                    }
-
-                    return newT;
-                });
-            }, 16);
-
-            return () => clearInterval(interval);
-        }, [camera]);
-
-        return null;
-    }
 
 
 
@@ -95,8 +77,12 @@ function BlackHole({ model }: { model: THREE.Group }) {
 }
 
 
-export default function Loader({model} : props) {
+type Props = {
+    model: THREE.Group;
+    onAnimateEnd: () => void;
+};
 
+export default function Loader({ model, onAnimateEnd }: Props) {
     return (
         <div className={styles.container}>
             <Canvas
@@ -111,30 +97,23 @@ export default function Loader({model} : props) {
                 style={{
                     width: '100%',
                     height: '100%',
-                    display: 'block', // block 요소로 설정
+                    display: 'block',
                 }}
             >
-                    <BlackHole model={model}/>
-                <pointLight position={[0, 3, 0]} distance={100} intensity={20}></pointLight>
-                    <CameraController/>
-                    {/*<CameraSetup/>*/}
-                {/*<OrbitControls/>*/}
-                {/*<ThreeGrid/>*/}
-                    <EffectComposer>
-                        <Bloom intensity={3} blurPass={undefined} luminanceThreshold={0.2} luminanceSmoothing={0.9} />
-                        {/*<Glitch delay={[3, 5]} />*/}
-                        <HueSaturation ></HueSaturation>
-                        <DepthOfField
-                            focusDistance={0} // where to focus
-                            focalLength={0.07} // focal length
-                            bokehScale={1.4} // bokeh size
-                        />
-                    </EffectComposer>
-            </Canvas>
+                <BlackHole model={model} />
+                <pointLight position={[0, 3, 0]} distance={100} intensity={20} />
+                <CameraController onAnimateEnd={onAnimateEnd} />
 
+                <EffectComposer>
+                    <Bloom intensity={3} luminanceThreshold={0.2} luminanceSmoothing={0.9} />
+                    <HueSaturation />
+                    <DepthOfField focusDistance={0} focalLength={0.07} bokehScale={1.4} />
+                </EffectComposer>
+            </Canvas>
         </div>
     );
 }
+
 
 //-19, 17, 0
 //-19, 17, -10
