@@ -24,7 +24,7 @@ export default function MainPage() {
             guideRef.current,
             {
                 opacity: 0,
-                transform: "translateZ(-10px)"
+                transform: "translateZ(-40px)"
             },
             {
                 opacity: 1,
@@ -43,7 +43,7 @@ export default function MainPage() {
             opacity: 1,
             transform: "translateX(80px)",
             ease: "power2.inOut",
-            duration: 4.5
+            duration: 4
         })
     }
 

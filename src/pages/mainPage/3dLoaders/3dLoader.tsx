@@ -17,41 +17,29 @@ type props = {
 
 function CameraController({ onAnimateEnd }: { onAnimateEnd: () => void }) {
     const { camera } = useThree();
-    const [t, setT] = useState(0);
     const targetLookAt = new THREE.Vector3(0, 3, 0);
     const [hasEnded, setHasEnded] = useState(false);
 
-    const quadratic = (x: number): number => {
-        return -0.001 * Math.pow(x, 2) + 0.155 * x + 1.964;
-    };
+    const { z, y } = useSpring({
+        z: 23,
+        y: 5,
+        from: { z: 7, y: 3 },
+        config: { mass: 2, tension: 30, friction: 15 },
+        onRest: () => {
+            if (!hasEnded) {
+                setHasEnded(true);
+                onAnimateEnd();
+            }
+        }
+    });
 
     useFrame(() => {
-        if (hasEnded) return; // 애니메이션이 끝나면 실행 중지
-
-        setT(prevT => {
-            const newT = prevT + 0.05;
-            const startZ = 7;
-            const targetZ = 23;
-            const a = 0.2;
-
-            const newZ = Math.min(startZ + a * newT * newT, targetZ);
-            const newY = quadratic(newZ);
-
-            camera.position.set(0, newY, newZ);
-            camera.lookAt(targetLookAt);
-
-            if (newZ >= targetZ) {
-                onAnimateEnd();
-                setHasEnded(true); // 애니메이션 종료 상태 설정
-            }
-
-            return newT;
-        });
+        camera.position.set(0, y.get(), z.get());
+        camera.lookAt(targetLookAt);
     });
 
     return null;
 }
-
 
 
 
