@@ -1,3 +1,5 @@
+@import "../../components/color";
+
 .focusText{
   background-color: white;
   color: black;
@@ -13,5 +15,28 @@
 .contents{
   width: calc(100% - 50px);
   height: calc(100% - 50px);
-  padding: 30px;
+}
+.profileContainer{
+  padding: 50px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  img{
+    border: 1px solid red;
+    border-radius: 20px;
+  }
+}
+
+.awardContainer{
+  padding: 50px;
+  border-top: 1px solid $border-second;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.profileText{
+  font-size: 20px;
+  color: $text-second;
+  margin-top: 25px;
 }
