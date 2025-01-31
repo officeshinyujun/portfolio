@@ -5,18 +5,20 @@ import testImage from "../../../assets/image/dat-profile.jpg"
 import {OrbitControls} from "@react-three/drei";
 import ThreeGrid from "../../../components/threeGrid.tsx";
 import { NearestFilter, LinearMipMapLinearFilter } from "three";
-import fresioImage from "../../../assets/image/fresio-main.jpg"
-import WorkThreeModel from "./workThreeModel.tsx";
+import fresioImage from "../../../assets/image/asdfasdfasdfasdf.png"
 import {useEffect} from "react";
+import AboutListBox from "../../../components/aboutListBox/aboutListBox.tsx";
+import WorkLinkBox from "./workLinkBox.tsx";
 
 
 type Project = {
     title: string,
-    text: string,
     styles : {
         boxShadow: string,
-        background: string,
-    }
+    },
+    image : any,
+    explanation: Array<string>,
+    links: Array<string>
 }
 
 type Props = {
@@ -44,19 +46,16 @@ export default function WorkFocusBox({selectedProject}: Props) {
                     왼쪽의 박스를 클릭해보세요!
                 </span>
             ) : (
-                <div className={styles.contents} style={{background:selectedProject.styles.background}}>
-                    <div>
-                        <p>{selectedProject.title}</p>
-                        <p>{selectedProject.text}</p>
+                <div className={styles.contents} style={{border : `1px solid ${selectedProject.styles.boxShadow}`}}>
+                    <p className={styles.title}>{selectedProject.title}</p>
+                    <div className={styles.imageContainer}>
+                        <img src={selectedProject.image} alt="test" />
                     </div>
-                    <div className={styles.threeContainer}>
-                        <Canvas>
-                            <ambientLight intensity={3}/>
-                            <WorkThreeModel image={testImage} position={[10,10,-1]} width={96} height={54}/>
-                            <WorkThreeModel image={testImage} position={[-10,-10,1]}/>
-                            <OrbitControls />
-                            <ThreeGrid/>
-                        </Canvas>
+                    <div className={styles.explanationBox}>
+                        {selectedProject.explanation.map((item) => (
+                            <p className={styles.explanation}>- {item}</p>
+                        ))}
+                        <WorkLinkBox workLinks={selectedProject.links}/>
                     </div>
                 </div>
             )}

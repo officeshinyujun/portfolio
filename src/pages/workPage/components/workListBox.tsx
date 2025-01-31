@@ -4,7 +4,7 @@ import gsap from "gsap";
 
 type Project = {
     title: string;
-    text: string;
+    slogan: string;
     styles: {
         boxShadow: string;
     };
@@ -46,7 +46,7 @@ export default function WorkListBox({ project, selectedFunction }: Props) {
         >
             <div>
                 <p>{project.title}</p>
-                <p>{project.text}</p>
+                <p>{project.slogan}</p>
             </div>
             <div className={styles.workImage}></div>
         </div>

@@ -20,15 +20,37 @@
   border-radius: $border-second-radius;
   display: flex;
   flex-direction: column;
+  align-items: start;
+  gap: 20px;
   padding: 30px;
-  p:first-child{
-    font-size: 30px;
-  }
-  p:last-child{
-    font-size: 15px;
+
+}
+
+.title{
+  font-size: 30px;
+}
+
+.explanation{
+  font-size: 15px;
+}
+
+.imageContainer{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img{
+    height: 100%;
+    width: auto;
+    border-radius: $border-first-radius;
   }
 }
 
-.threeContainer{
-  height: 500px;
+.explanationBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
 }
