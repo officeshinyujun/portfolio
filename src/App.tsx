@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import styles from "./app.module.scss";
 import headerStyles from "./components/header/header.module.scss"
@@ -10,19 +10,10 @@ import AboutPage from "./pages/aboutPage/aboutPage.tsx";
 import TechPage from "./pages/techPage/techPage";
 
 function App() {
-    const [isLoading, setIsLoading] = useState(true);
     const mainRef = useRef(null);
     const techRef = useRef(null);
     const workRef = useRef(null);
     const aboutRef = useRef(null);
-
-    useEffect(() => {
-        const waitFunction = () => {
-            const randomNum = Math.random() * (3 - 2) + 2;
-            setTimeout(() => setIsLoading(false), randomNum * 1000);
-        };
-        waitFunction();
-    }, []);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -99,7 +90,7 @@ function App() {
                     const header = pages[index + 1].querySelector(`.${headerStyles.headerCon}`);
                     const pageLine = pages[index+1].querySelector(`.${pageLineStyles.line}`)
                     if (header && pageLine) {
-                        pageHeaderIn(header as HTMLElement, pages[index+1], pageLine);
+                        pageHeaderIn(header as HTMLElement, pages[index+1], pageLine as HTMLElement);
                     }
                 }
             });

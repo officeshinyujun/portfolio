@@ -1,7 +1,4 @@
 import styles from "./techBox.module.scss"
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Import AnimatePresence
-import folderImage from "../../../../assets/image/folder.svg";
 
 type Props = {
     text: string;

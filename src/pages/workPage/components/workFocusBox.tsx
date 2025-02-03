@@ -1,13 +1,6 @@
 import styles from "./workFocusBox.module.scss"
-import {Canvas, useLoader} from "@react-three/fiber";
-import {TextureLoader} from "three";
 import testImage from "../../../assets/image/dat-profile.jpg"
-import {OrbitControls} from "@react-three/drei";
-import ThreeGrid from "../../../components/threeGrid.tsx";
-import { NearestFilter, LinearMipMapLinearFilter } from "three";
-import fresioImage from "../../../assets/image/asdfasdfasdfasdf.png"
 import {useEffect} from "react";
-import AboutListBox from "../../../components/aboutListBox/aboutListBox.tsx";
 import WorkLinkBox from "./workLinkBox.tsx";
 
 
@@ -16,7 +9,7 @@ type Project = {
     styles : {
         boxShadow: string,
     },
-    image : any,
+    image : string,
     explanation: Array<string>,
     links: Array<string>
 }
@@ -26,18 +19,11 @@ type Props = {
 }
 
 export default function WorkFocusBox({selectedProject}: Props) {
-    const testMap = useLoader(TextureLoader, testImage);
-    testMap.magFilter = NearestFilter; // 확대 시 선명하게
-    testMap.minFilter = LinearMipMapLinearFilter; // 축소 시 품질 유지
-    const fresioMap = useLoader(TextureLoader,fresioImage);
-
     useEffect(() => {
         const img = new Image();
         img.src = testImage;
         img.onload = () => console.log(img.naturalHeight);
     }, []);
-
-
 
     return (
         <div className={styles.container}>

@@ -8,12 +8,8 @@ import {
     Bloom,
     DepthOfField, HueSaturation
 } from '@react-three/postprocessing';
-
-type props = {
-    model : THREE.Group;
-    onAnimateEnd: () => void;
-}
-
+// @ts-ignore
+import {GLTF} from "three/examples/jsm/loaders/GLTFLoader";
 
 function CameraController({ onAnimateEnd }: { onAnimateEnd: () => void }) {
     const { camera } = useThree();
@@ -44,7 +40,7 @@ function CameraController({ onAnimateEnd }: { onAnimateEnd: () => void }) {
 
 
 
-function BlackHole({ model }: { model: THREE.Group }) {
+function BlackHole({ model }: { model: GLTF }) {
     const blackHoleRef = useRef<THREE.Group>(null);
     useFrame((_, delta) => {
         if (blackHoleRef.current) {
@@ -66,7 +62,7 @@ function BlackHole({ model }: { model: THREE.Group }) {
 
 
 type Props = {
-    model: THREE.Group;
+    model: GLTF;
     onAnimateEnd: () => void;
 };
 
@@ -101,16 +97,3 @@ export default function Loader({ model, onAnimateEnd }: Props) {
         </div>
     );
 }
-
-
-//-19, 17, 0
-//-19, 17, -10
-//top view
-//0, 0, -20
-//0, 50, 20
-//1 island view
-//-65, 10, -23
-//-30, 10, -40
-//2 island view
-//38, 8, -25
-//38, 8, -40

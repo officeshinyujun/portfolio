@@ -11,7 +11,7 @@ import workiImage from "../../assets/image/worki.png"
 
 
 export default function WorkPage() {
-    const [workList, setWorkList] = useState([
+    const workList = [
         {
             index: 0,
             title: "Fresio",
@@ -58,7 +58,11 @@ export default function WorkPage() {
             explanation: ["ai 기반 브레인스토밍 플랫폼입니다.웹의 프론트엔드를 담당하였습니다.", "react-vite를 이용하여 프론트엔드를 구현하였고, liveBlocks를 사용하여 실시간 처리를 해보았습니다."],
             links: ["https://github.com/sunrint-spark/spark-frontend"]
         },
-    ]);
+        {
+            index : 4,
+            title : "왼쪽의 박스를 클릭해보세요!"
+        }
+    ];
 
     const [selectedWork, setSelectedWork] = useState(null);
 
@@ -82,7 +86,7 @@ export default function WorkPage() {
                     ))}
                 </div>
                 <div className={styles.workFocusBox}>
-                    <WorkFocusBox selectedProject={selectedWork}/>
+                    <WorkFocusBox selectedProject={selectedWork} />
                 </div>
             </div>
         </div>
