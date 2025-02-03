@@ -57,10 +57,6 @@ export default function WorkPage() {
             image : sparkImage,
             explanation: ["ai 기반 브레인스토밍 플랫폼입니다.웹의 프론트엔드를 담당하였습니다.", "react-vite를 이용하여 프론트엔드를 구현하였고, liveBlocks를 사용하여 실시간 처리를 해보았습니다."],
             links: ["https://github.com/sunrint-spark/spark-frontend"]
-        },
-        {
-            index : 4,
-            title : "왼쪽의 박스를 클릭해보세요!"
         }
     ];
 
@@ -71,6 +67,7 @@ export default function WorkPage() {
         console.log(item);
     };
 
+    // @ts-ignore
     return (
         <div className={styles.container}>
             <Header title="work" />
