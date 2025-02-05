@@ -2,7 +2,7 @@ import styles from "./aboutPage.module.scss"
 import Header from "../../components/header/header.tsx";
 import PageLine from "../../components/pageLine/pageLine.tsx";
 import AboutListBox from "../../components/aboutListBox/aboutListBox.tsx";
-import testImage from "../../assets/image/profileImage.jpg"
+import profileImage from "../../assets/image/20250205_231947.jpg"
 import GithubImage from "../../assets/image/icons8-github의.svg"
 import InstarImage from "../../assets/image/icons8-인스-타-그램.svg"
 import BlogImage from "../../assets/image/icons8-google-블로그-검색.svg"
@@ -37,7 +37,7 @@ export default function AboutPage() {
                             </a>
                         </div>
                     </div>
-                    <img src={testImage} alt="about" width={300} height={300} className={styles.profileImage}/>
+                    <img src={profileImage} alt="about" width={300} height={300} className={styles.profileImage}/>
                 </div>
                 <div className={styles.awardContainer}>
                     <AboutListBox title={"수상 실적"} contents={["28회 앱잼 생활부문 우수상", "2024 sw 동행 해커톤 이사장상"]}/>

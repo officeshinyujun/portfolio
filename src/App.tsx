@@ -8,6 +8,7 @@ import WorkPage from "./pages/workPage/workPage";
 import MainPage from "./pages/mainPage/mainPage";
 import AboutPage from "./pages/aboutPage/aboutPage.tsx";
 import TechPage from "./pages/techPage/techPage";
+import {Suspense} from "react";
 
 function App() {
     const mainRef = useRef(null);
@@ -111,20 +112,25 @@ function App() {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <div ref={mainRef} className={`${styles.page} ${styles.mainPage}`}>
-                <MainPage />
+        <Suspense fallback={<div className={styles.loadingPage}>
+            <p>Loading...</p>
+        </div>}>
+            <div className={styles.container}>
+                <div ref={mainRef} className={`${styles.page} ${styles.mainPage}`}>
+                    <MainPage />
+                </div>
+                <div ref={aboutRef} className={`${styles.page} ${styles.aboutPage}`}>
+                    <AboutPage />
+                </div>
+                <div ref={techRef} className={`${styles.page} ${styles.techPage}`}>
+                    <TechPage />
+                </div>
+                <div ref={workRef} className={`${styles.page} ${styles.workPage}`}>
+                    <WorkPage />
+                </div>
             </div>
-            <div ref={aboutRef} className={`${styles.page} ${styles.aboutPage}`}>
-                <AboutPage />
-            </div>
-            <div ref={techRef} className={`${styles.page} ${styles.techPage}`}>
-                <TechPage />
-            </div>
-            <div ref={workRef} className={`${styles.page} ${styles.workPage}`}>
-                <WorkPage />
-            </div>
-        </div>
+        </Suspense>
+
     );
 }
 
