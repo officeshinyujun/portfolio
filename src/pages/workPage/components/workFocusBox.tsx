@@ -6,18 +6,17 @@ import WorkLinkBox from "./workLinkBox.tsx";
 
 type Project = {
     title: string,
-    styles : {
+    styles: {
         boxShadow: string,
     },
-    image : string,
+    image: string,
     explanation: Array<string>,
     links: Array<string>
-}
+} | null  // Add null as possible type
 
 type Props = {
-    selectedProject: Project
+    selectedProject: Project  // Now accepts null
 }
-
 export default function WorkFocusBox({selectedProject}: Props) {
     useEffect(() => {
         const img = new Image();
