@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import {useRef, useEffect, useState} from "react";
 import { gsap } from "gsap";
 import styles from "./app.module.scss";
 import headerStyles from "./components/header/header.module.scss"
@@ -6,19 +6,34 @@ import pageLineStyles from "./components/pageLine/pagesLine.module.scss"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WorkPage from "./pages/workPage/workPage";
 import MainPage from "./pages/mainPage/mainPage";
-import AboutPage from "./pages/aboutPage/aboutPage.tsx";
+import AboutPage from "./pages/aboutPage/aboutPage";
 import TechPage from "./pages/techPage/techPage";
-import {Suspense} from "react";
+import { Suspense } from "react";
 
 function App() {
+    const containerRef = useRef(null);
     const mainRef = useRef(null);
     const techRef = useRef(null);
     const workRef = useRef(null);
     const aboutRef = useRef(null);
 
     useEffect(() => {
+        const timer = setTimeout(() => {
+            initializeAnimations();
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    const initializeAnimations = () => {
         gsap.registerPlugin(ScrollTrigger);
+
         const pages = gsap.utils.toArray<HTMLElement>(`.${styles.page}`);
+
+        if (!pages.length) {
+            console.warn('No pages found');
+            return;
+        }
 
         const pageHeaderIn = (header: HTMLElement, page: HTMLElement, pageLine: HTMLElement) => {
             gsap.to(header, {
@@ -27,7 +42,7 @@ function App() {
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: page,
-                    start: "top center-=200", // 헤더가 화면 하단에 도달하면 시작
+                    start: "top center-=200",
                     end: "top top",
                     scrub: true,
                 }
@@ -37,7 +52,7 @@ function App() {
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: page,
-                    start: "top center-=200", // 헤더가 화면 하단에 도달하면 시작
+                    start: "top center-=200",
                     end: "top top",
                     scrub: true,
                 }
@@ -83,10 +98,9 @@ function App() {
                 }
             });
 
-            // 헤더 애니메이션 트리거
             ScrollTrigger.create({
                 trigger: pages[index + 1],
-                start: "top bottom", // 페이지가 화면 하단에 보이기 시작할 때
+                start: "top bottom",
                 onEnter: () => {
                     const header = pages[index + 1].querySelector(`.${headerStyles.headerCon}`);
                     const pageLine = pages[index+1].querySelector(`.${pageLineStyles.line}`)
@@ -97,25 +111,19 @@ function App() {
             });
         }
 
-        if (pages.length > 0) {
-            pages.forEach((page, index) => {
-                if (index < pages.length - 1) {
-                    fadeOut(page);
-                    fadeIn(pages, index);
-                }
-            });
-        }
-
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        };
-    }, []);
+        pages.forEach((page, index) => {
+            if (index < pages.length - 1) {
+                fadeOut(page);
+                fadeIn(pages, index);
+            }
+        });
+    };
 
     return (
         <Suspense fallback={<div className={styles.loadingPage}>
             <p>Loading...</p>
         </div>}>
-            <div className={styles.container}>
+            <div ref={containerRef} className={styles.container}>
                 <div ref={mainRef} className={`${styles.page} ${styles.mainPage}`}>
                     <MainPage />
                 </div>
@@ -130,7 +138,6 @@ function App() {
                 </div>
             </div>
         </Suspense>
-
     );
 }
 
