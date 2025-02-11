@@ -1,8 +1,8 @@
-import {useRef, useEffect} from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import styles from "./app.module.scss";
-import headerStyles from "./components/header/header.module.scss"
-import pageLineStyles from "./components/pageLine/pagesLine.module.scss"
+import headerStyles from "./components/header/header.module.scss";
+import pageLineStyles from "./components/pageLine/pagesLine.module.scss";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WorkPage from "./pages/workPage/workPage";
 import MainPage from "./pages/mainPage/mainPage";
@@ -16,18 +16,19 @@ function App() {
     const techRef = useRef(null);
     const workRef = useRef(null);
     const aboutRef = useRef(null);
+    const [isLoaded, setIsLoaded] = useState(false); // Suspense가 끝났는지 추적
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            initializeAnimations();
-        }, 10000);
-
-        return () => clearTimeout(timer);
-    }, []);
+        if (isLoaded) {
+            const timer = setTimeout(() => {
+                initializeAnimations();
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [isLoaded]);
 
     const initializeAnimations = () => {
         gsap.registerPlugin(ScrollTrigger);
-
         const pages = gsap.utils.toArray<HTMLElement>(`.${styles.page}`);
 
         if (!pages.length) {
@@ -47,8 +48,8 @@ function App() {
                     scrub: true,
                 }
             });
-            gsap.to(pageLine,{
-                left:"50px",
+            gsap.to(pageLine, {
+                left: "50px",
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: page,
@@ -56,8 +57,8 @@ function App() {
                     end: "top top",
                     scrub: true,
                 }
-            })
-        }
+            });
+        };
 
         const fadeOut = (page: HTMLElement) => {
             gsap.to(page, {
@@ -74,7 +75,7 @@ function App() {
                     pinSpacing: false,
                 }
             });
-        }
+        };
 
         const fadeIn = (pages: HTMLElement[], index: number) => {
             gsap.from(pages[index + 1], {
@@ -103,13 +104,13 @@ function App() {
                 start: "top bottom",
                 onEnter: () => {
                     const header = pages[index + 1].querySelector(`.${headerStyles.headerCon}`);
-                    const pageLine = pages[index+1].querySelector(`.${pageLineStyles.line}`)
+                    const pageLine = pages[index + 1].querySelector(`.${pageLineStyles.line}`);
                     if (header && pageLine) {
-                        pageHeaderIn(header as HTMLElement, pages[index+1], pageLine as HTMLElement);
+                        pageHeaderIn(header as HTMLElement, pages[index + 1], pageLine as HTMLElement);
                     }
                 }
             });
-        }
+        };
 
         pages.forEach((page, index) => {
             if (index < pages.length - 1) {
@@ -120,10 +121,12 @@ function App() {
     };
 
     return (
-        <Suspense fallback={<div className={styles.loadingPage}>
-            <p>Loading...</p>
-        </div>}>
-            <div ref={containerRef} className={styles.container}>
+        <Suspense fallback={<div className={styles.loadingPage}><p>Loading...</p></div>}>
+            <div
+                ref={containerRef}
+                className={styles.container}
+                onLoad={() => setIsLoaded(true)} // Suspense가 끝나면 isLoaded를 true로 설정
+            >
                 <div ref={mainRef} className={`${styles.page} ${styles.mainPage}`}>
                     <MainPage />
                 </div>
