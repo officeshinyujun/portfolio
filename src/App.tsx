@@ -121,7 +121,7 @@ function App() {
     };
 
     return (
-        <Suspense fallback={<div className={styles.loadingPage}><p>Loading...</p></div>}>
+        <Suspense fallback={<div className={styles.loadingPage}><p>Loading..</p></div>}>
             <div
                 ref={containerRef}
                 className={styles.container}
