@@ -32,7 +32,7 @@ export default function AboutPage() {
                             <a href={"https://github.com/officeshinyujun"} target="_blank">
                                 <img src={GithubImage} alt="github" width={30}/>
                             </a>
-                            <a href={"https://officeshinyujun.github.io/web-study-blog/"} target="_blank">
+                            <a href={"https://web-study-blog.vercel.app/"} target="_blank">
                                 <img src={BlogImage} alt="blog" width={30}/>
                             </a>
                         </div>
